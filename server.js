@@ -25,7 +25,7 @@ const db = knex({
 
 
 app.get('/', (req,res)=>{
-
+    res.json('Welcome!');
 });
 
 app.post('/signin',(req,res) =>{ signin.handleSignin(req, res, db, bcrypt)});
