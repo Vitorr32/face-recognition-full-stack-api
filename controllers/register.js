@@ -39,8 +39,8 @@ const checkExistingUser = (req, res, db) =>{
     }
     db.
         whereNotExists(db('users').where('email',email))
-        .then(res.status(202))
-        .catch(res.status(409))
+        .then(res.status(202).json('All okay!'))
+        .catch(res.status(409).json('There is already an email registered!'))
 }
 
 module.exports = {
