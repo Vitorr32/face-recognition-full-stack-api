@@ -31,26 +31,6 @@ const handleRegister = (req,res, db, bcrypt) =>{
     .catch(err => res.status(400).json(`Unable to Register`));
 };
 
-const checkExistingUser = (req, res, db) =>{
-    const {email} = req.body;
-
-    if(!email){
-        return res.status(400).json('No email to check!');
-    }
-    db.select('*').from('users').where({id})
-        .then( response => {
-            console.log(response.json());
-            if(response.json().length === 0){
-                return res.status(202).json('All okay!');
-            }
-            else{
-                return res.status(409).json('There is already an email registered!');
-            }
-        })
-        .catch(res.status(400).json('Problems with the database!'))
-}
-
 module.exports = {
     handleRegister : handleRegister,
-    checkExistingUser : checkExistingUser
 }
