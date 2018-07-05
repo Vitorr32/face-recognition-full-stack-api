@@ -31,7 +31,7 @@ app.post('/signin',(req,res) =>{ signin.handleSignin(req, res, db, bcrypt)});
 
 app.post('/register',(req,res) =>{ register.handleRegister(req, res, db, bcrypt)});
 
-app.post('/registercheck',(req,res) =>{ register.checkExistingUser(req, res, db, bcrypt)});
+app.post('/registercheck',(req,res) =>{ register.checkExistingUser(req, res, db)});
 
 app.get('/profile/:id',(req,res)=>{ profile.handleProfileGet(req, res, db)});
 
