@@ -39,8 +39,8 @@ const checkExistingUser = (req, res, db) =>{
     }
     db.select('*').from('users').where({id})
         .then( response => {
-            console.log(response);
-            if(response.length === 0){
+            console.log(response.json());
+            if(response.json().length === 0){
                 return res.status(202).json('All okay!');
             }
             else{
