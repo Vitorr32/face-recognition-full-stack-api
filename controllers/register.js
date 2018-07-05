@@ -37,10 +37,17 @@ const checkExistingUser = (req, res, db) =>{
     if(!email){
         return res.status(400).json('No email to check!');
     }
-    db.
-        whereNotExists(db('users').where('email',email))
-        .then(res.status(202).json('All okay!'))
-        .catch(res.status(409).json('There is already an email registered!'))
+    db.select('*').from('users').where({id})
+        .then( response => {
+            console.log(response);
+            if(response.length === 0){
+                return res.status(202).json('All okay!');
+            }
+            else{
+                return res.status(409).json('There is already an email registered!');
+            }
+        })
+        .catch(res.status(400).json('Problems with the database!'))
 }
 
 module.exports = {
