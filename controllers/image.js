@@ -10,7 +10,7 @@ const callApi = (req, res) =>{
         .then(data => {
             res.json(data);
         })
-        .catch(err => res=>status(400).json('Unable to acess API'))
+        .catch(err => res.status(400).json('Unable to acess API'))
 }
 
 

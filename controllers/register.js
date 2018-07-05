@@ -31,6 +31,19 @@ const handleRegister = (req,res, db, bcrypt) =>{
     .catch(err => res.status(400).json(`Unable to Register`));
 };
 
+const checkExistingUser = (req, res, db) =>{
+    const {email} = req.body;
+
+    if(!email){
+        return res.status(400).json('No email to check!');
+    }
+    db.
+        whereNotExists(db('users').where('email',email))
+        .then(res.status(202))
+        .catch(res.status(409))
+}
+
 module.exports = {
     handleRegister : handleRegister,
+    checkExistingUser : checkExistingUser
 }
