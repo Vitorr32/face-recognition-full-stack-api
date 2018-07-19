@@ -13,12 +13,11 @@ const app = express();
 app.use(bodyParser.json());
 app.use(cors());
 
+console.log('yolo');
+
 const db = knex({
     client: 'pg',
-    connection: {
-      connectionString : process.env.DATABASE_URL,
-      ssl: true
-    }
+    connection: process.env.POSTGRES_URI
 });
 
 
