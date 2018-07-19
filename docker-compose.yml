@@ -1,29 +1,32 @@
 version: '3.6'
-
 services:
+  # PostgreSQL
+  postgres:
+    container_name: postgres
+    image: postgres
+    build: ./postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_URL: postgres://admin:password@localhost:5432/face-recognition-db
+      POSTGRES_DB: face-recognition-db
+      POSTGRES_HOST: postgres
+    ports:
+      - "5432:5432"
+
   #Backend API
   face-recognition-api:
     container_name: backend
     build: ./
-    volumes:
-      - ./:/usr/src/face-recognition-api
     command: npm start
     working_dir: /usr/src/face-recognition-api
+    ports:
+      - "3000:3000"
     environment:
-      POSTGRES_URI: postgres://whale:whaling@postgres:5432/face-recognition-db
+      POSTGRES_URI: postgres://admin:password@postgres:5432/face-recognition-db
       API_CLARIFAI: e25d4397564b4d5abbfa90da26bb9c4d
     links:
       - postgres
-    ports:
-      - "3001:3001"
+    
       
-  #Postgres
-  postgres:
-    environment:
-      POSTGRES_USER: whale
-      POSTGRES_PASSWORD: whaling
-      POSTGRES_DB: face-recognition-db
-      POSTGRES_HOST: postgres
-    image: postgres
-    ports:
-      - "5432:5432"
+  

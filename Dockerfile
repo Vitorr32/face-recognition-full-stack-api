@@ -1,4 +1,4 @@
-FROM node:carbon 
+FROM node:8.11.1
 
 WORKDIR /usr/src/face-recognition-api
 
